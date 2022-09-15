@@ -1,0 +1,27 @@
+{
+  "name": "phonebook_backend",
+  "version": "0.0.1",
+  "description": "backend application for the pohonebook app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alonbofficial/Part-3-Exercises.git"
+  },
+  "author": "Alon Butbul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alonbofficial/Part-3-Exercises/issues"
+  },
+  "homepage": "https://github.com/alonbofficial/Part-3-Exercises#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
