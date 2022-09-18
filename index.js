@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 let persons = [
     { 
       "id": 1,
@@ -44,12 +46,36 @@ app.get('/api/persons/:id', (request, response) => {
     }
 })
 
-app.delete('/api/persons/:id', (request, respons) =>{
+app.delete('/api/persons/:id', (request, response) =>{
 
     const id = Number(request.params.id)
     persons = persons.filter(note => note.id !== id)
 
     response.status(404).end()
+})
+
+
+const generateId = (max) => Math.floor(Math.random() * max)
+
+app.post('/api/persons', (request, response) => {
+
+    const body = request.body
+    
+    //Check if request body is empty:
+    if(!body.name || !body.number){
+        return response.status(400).json({
+            error:'Some information is missing'
+        })
+    }
+
+    const newRecord = {
+        id: generateId(10000),
+        name: body.name,
+        number: body.number
+    }
+    
+    persons = persons.concat(newRecord)
+    response.json(newRecord)
 })
 
 const PORT = 3001
