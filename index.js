@@ -3,8 +3,9 @@ var morgan = require('morgan')
 
 const app = express()
 
-app.use(morgan('tiny'))
 app.use(express.json())
+morgan.token('body', (req) => JSON.stringify(req.body))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 let persons = [
     { 
@@ -57,9 +58,7 @@ app.delete('/api/persons/:id', (request, response) =>{
     response.status(404).end()
 })
 
-
 const generateId = (max) => Math.floor(Math.random() * max)
-
 app.post('/api/persons', (request, response) => {
 
     const body = request.body
