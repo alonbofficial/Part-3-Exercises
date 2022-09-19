@@ -60,12 +60,19 @@ const generateId = (max) => Math.floor(Math.random() * max)
 app.post('/api/persons', (request, response) => {
 
     const body = request.body
-    
+
     //Check if request body is empty:
-    if(!body.name || !body.number){
+    if(!body.name || !body.number){//undefined == false
         return response.status(400).json({
             error:'Some information is missing'
         })
+    }else{
+        const hasName = persons.find(person => person.name === body.name)
+        if(hasName){
+            return response.status(400).json({
+                error:'name must be unique'
+            })
+        }
     }
 
     const newRecord = {
